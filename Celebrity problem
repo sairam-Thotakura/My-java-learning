@@ -1,0 +1,41 @@
+import java.util.*;
+public class Main{
+    static int celebrity(int n,int arr[][]){
+        int i;
+        Stack <Integer> st=new Stack<>();
+        for( i=0;i<n;i++)
+        st.push(i);
+
+        while(st.size()>1){
+            int a=st.pop();
+            int b=st.pop();
+
+            if(arr[a][b]==1)
+            st.push(b);
+            else
+            st.push(a);
+        }
+        int celeb=st.pop();
+        for( i=0;i<n;i++)
+        if(i!=celeb && ((arr[celeb][i]==1) || (arr[i][celeb]==0)))
+        return -1;
+
+        return celeb;
+}
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int arr[][]=new int[n][n];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                arr[i][j]=sc.nextInt();
+            }
+        }
+
+        int res=celebrity(n,arr);
+        if(res==-1)
+        System.out.println("No celebrity");
+        else
+        System.out.println("Celebrity :"+res);
+    }
+}
