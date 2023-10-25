@@ -1,0 +1,66 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static class Node{
+        int data;
+        Node right,left;
+        Node(int val){
+            this.data=val;
+            this.left=null;
+            this.right=null;
+        }
+    }
+   
+    static Node build(String []s){
+         if(s[0]=="-1"||s.length==0) return null;
+        
+        Node root=new Node(Integer.parseInt(s[0]));
+         Queue<Node> q=new LinkedList<Node>();
+            q.add(root);
+            int i=1;
+        
+        while(!q.isEmpty() && i<s.length){
+            Node curr=q.poll();
+            String cval=s[i];
+            if(!cval.equals("-1")){
+                 int h=Integer.parseInt(cval);
+                 curr.left=new Node(h);
+                 q.add(curr.left);
+            }
+            i++;
+          if(i >= s.length)
+             break;
+            cval = s[i];
+            if(!cval.equals("-1"))
+            {
+                int h=Integer.parseInt(cval);
+                curr.right=new Node(h);
+                q.add(curr.right);
+            }
+            i++;
+    }
+        return root;
+    }
+    
+    static boolean isLeaf(Node root){
+          return(root.left == null && root.right ==null);
+    }
+    
+     static int leftsum(Node root,boolean isLeft){
+        if(root==null)  return 0;
+        if(isLeaf(root) && isLeft)  return root.data;
+        return leftsum(root.left,true)+leftsum(root.right,false);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner (System.in);
+        String s[]=sc.nextLine().split(" ");
+        int i;
+        if(s[0].equals("-1")){
+            System.out.print("0");return;
+        }
+        Node root=build(s);
+          System.out.println(leftsum(root,false));
+    }
+}
