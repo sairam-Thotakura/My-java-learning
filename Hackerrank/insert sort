@@ -1,0 +1,34 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+       Scanner sc=new Scanner(System.in);
+        
+        
+         LinkedList <Integer> l=new LinkedList<> ();
+            int data=0;
+            while(true){
+                data=sc.nextInt();
+                if (data==-1)  break;
+                l.add(data);
+            }
+        
+        int n=l.size();
+        
+        for(int i=1;i<n;++i){
+            int key=l.get(i);
+            int j=i-1;
+            
+            while(j>0 && l.get(j)>key){
+                l.set(j+1,l.get(j));
+                j=j-1;
+            }
+            l.set(j+1,key);
+        }
+        for(int k : l)
+            System.out.print(k+" ");
+        
+}
+}
