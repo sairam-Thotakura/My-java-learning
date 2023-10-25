@@ -1,0 +1,86 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static Node head;
+    static class Node{
+        int data;
+        Node next;
+        Node(int x){
+            data=x;
+        }
+    }
+    public static void append(int x){
+        if(head==null){head=new Node(x);
+                      return;}
+        Node curr=head;
+        while(curr.next!=null){
+            curr=curr.next;
+        }
+        curr.next=new Node(x);
+    }
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Solution list=new Solution();
+        Scanner sc=new Scanner(System.in);
+       // head=new Node(sc.nextInt())
+       int size=0;
+        while(true){
+            int v=sc.nextInt();
+            if(v==-1){break;}
+            list.append(v);
+            size++;
+        }
+        list.reorder(size);
+    }
+   
+    public static void reorder(int size){
+        Node slow=head,fast=head;
+
+        //to obtain the middle element in slow pointer
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        Node stop=slow;
+       //System.out.println("Middle: "+stop.data);
+       
+        Stack<Integer> s=new Stack<>();
+        slow=slow.next;
+       
+        //storing the second half in stack
+        while(slow!=null){
+            s.push(slow.data);
+            //System.out.print(slow.data+" ");
+            slow=slow.next;
+        }
+        //System.out.println();
+        //reord reor=new reord();
+        Node left=head;
+
+        while(left!=stop && s.size()>=1){
+            System.out.print(left.data+" "+s.pop()+" ");
+            left=left.next;
+        }
+       
+       
+        if(left!=null){
+            System.out.print(left.data+" ");
+        }
+        if(size%2==0){
+            System.out.print(stop.data);
+        }
+        System.out.println();
+      //  reor.print();
+    }
+    public static void print(){
+        Node n=head;
+        while(n!=null){
+            System.out.print(n.data+" ");
+            n=n.next;
+        }
+    }
+}
