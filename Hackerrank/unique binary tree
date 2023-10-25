@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        long numlim=2*n;
+        long num=1;
+        while(numlim>=1){
+            num*=numlim;
+            numlim--;
+        }
+        long denlim=n+1;
+        long den=1;
+        while(denlim>1){
+            den*=denlim;
+            denlim--;
+        }
+        long denlim2=n;
+        long den2=1;
+        while(denlim2>1){
+            den2*=denlim2;
+            denlim2--;
+        }
+        den2*=den;
+        long ans =num/den2;
+        System.out.println(ans);
+    }
+}
