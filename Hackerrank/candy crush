@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution{
+
+    public static void main(String[] args) {
+        
+        Scanner sc=new Scanner(System.in);
+        String s=sc.next();
+        System.out.print(candycrush(s));
+    }
+    public static String candycrush(String s){
+        int l=0,r=0;
+        for(r=l+1;r<s.length()-1;r++){
+            int c=1;              
+                while(s.charAt(l)==s.charAt(r)){
+                    r++;
+                c++;
+                 }
+                if(c>=3){
+                s=s.substring(0,l)+s.substring(r,s.length());
+                     l=0;
+                r=0;
+                }                   
+            
+            else{
+                l=r;
+            }
+        }
+        return s;
+    }
+}
